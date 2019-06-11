@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Comedian GIFs!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+</head>
+
+<body>
+        <div class="jumbotron">
+                <h1 class="display-4">Welcome!</h1>
+                <p class="lead">Press the buttons below to generate ten gifs related to that famous actress or comedian</p>
+                <hr class="my-4">
+                <p>You can also enter the names of any actresses or comedians not listed above into the search bar below to generate additional buttons that will generate GIFs related to your search word.</p>
+        </div>
+
+    <div class="container-fluid buttons-container">
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" >
+                <div id="img-container" class='row'></div>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="form-control-lg">Add a button by entering a keyword below </label>
+                <input class="form-control form-control-lg" id="keyword" type="text" placeholder="">
+                <input class="btn btn-primary" type="submit" id="submit" value="Submit">
+            </div>
+
+        </div>
+
+        <script src="assets/app.js"></script>
+</body>
+
+</html>
