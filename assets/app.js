@@ -70,13 +70,15 @@ $("#img-container").on("click", "img", function() {
   }
 });
 
-$(".container").on("click", ".favorite", function (){
-  var stillGif = $(this).attr("data-still")
-  var animatedGif = $(this).attr("data-animate")
-  var favGif = $("<img>").attr("data-still", stillGif).attr("data-animate", animatedGif).attr("src", stillGif);
-  $("#favorites").prepend(favGif)
-  
-})
+$(".container").on("click", ".favorite", function() {
+  var stillGif = $(this).attr("data-still");
+  var animatedGif = $(this).attr("data-animate");
+  var favGif = $("<img>")
+    .attr("data-still", stillGif)
+    .attr("data-animate", animatedGif)
+    .attr("src", stillGif);
+  $("#favorites").prepend(favGif);
+});
 
 $("#favorites").on("click", "img", function() {
   var state = $(this).attr("data-state");
@@ -91,24 +93,23 @@ $("#favorites").on("click", "img", function() {
   }
 });
 
-
 $("#submit").on("click", function() {
   event.preventDefault();
 
-if($("#keyword").val() !== "" ){
-  function addBtn() {
-    var keyword = $("#keyword")
-      .val()
-      .trim();
-    var newBtn = $("<button>")
-      .attr("data-person", keyword)
-      .addClass("personButton")
-      .text(keyword);
-    $(".buttons-container").append(newBtn);
-  }
-  addBtn();}
-  else {
-    alert("Please enter a search term")
+  if ($("#keyword").val().trim() !== "") {
+    function addBtn() {
+      var keyword = $("#keyword")
+        .val()
+        .trim();
+      var newBtn = $("<button>")
+        .attr("data-person", keyword)
+        .addClass("personButton")
+        .text(keyword);
+      $(".buttons-container").append(newBtn);
+    }
+    addBtn();
+  } else {
+    alert("Please enter a search term");
   }
   $("#keyword").val("");
 });
