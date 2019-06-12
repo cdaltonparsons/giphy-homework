@@ -12,6 +12,7 @@ var buttons = [
   "iliza shlesinger",
   "natasha leggero"
 ];
+var offset = 0;
 for (var i = 0; i < buttons.length; i++) {
   var gifButton = $("<button>")
     .attr("data-person", buttons[i])
@@ -24,7 +25,8 @@ $(".buttons-container").on("click", ".personButton", function() {
   var queryURL =
     "https://api.giphy.com/v1/gifs/search?q=" +
     person +
-    "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+    "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10&offset=" +
+    offset;
 
   $.ajax({
     url: queryURL,
@@ -36,20 +38,26 @@ $(".buttons-container").on("click", ".personButton", function() {
     for (var i = 0; i < results.length; i++) {
       var personDiv = $("<div>");
       var rating = results[i].rating;
-      var p = $("<p>").text("Rating : " + rating);
+      var p = $("<p>").html("Rating : " + rating);
+      var favorite = $("<button>")
+        .text("Like")
+        .addClass("favorite")
+        .attr("animate-url", results[i].images.fixed_height.url)
+        .attr("still-url", results[i].images.fixed_height_still.url);
+      p.append(favorite);
       var personImg = $("<img>")
         .attr("src", results[i].images.fixed_height_still.url)
         .attr("data-state", "still")
         .attr("animate-url", results[i].images.fixed_height.url)
-        .attr("still-url", results[i].images.fixed_height_still.url)
-        .addClass("gifs col-md-6");
+        .attr("still-url", results[i].images.fixed_height_still.url);
       personDiv.append(personImg, p);
       $("#img-container").append(personDiv);
     }
   });
+  offset += 10;
 });
 
-$("#img-container").on("click", ".gifs", function() {
+$("#img-container").on("click", "img", function() {
   var state = $(this).attr("data-state");
   var stillUrl = $(this).attr("still-url");
   var animateUrl = $(this).attr("animate-url");
@@ -60,6 +68,7 @@ $("#img-container").on("click", ".gifs", function() {
     $(this).attr("src", stillUrl);
     $(this).attr("data-state", "still");
   }
+  console.log(this);
 });
 
 $("#submit").on("click", function() {
@@ -75,6 +84,6 @@ $("#submit").on("click", function() {
       .text(keyword);
     $(".buttons-container").append(newBtn);
   }
-  $("#keyword").empty();
   addBtn();
+  $("#keyword").val("");
 });

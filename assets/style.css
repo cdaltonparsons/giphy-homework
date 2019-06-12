@@ -11,7 +11,7 @@ body {
     color: chartreuse; 
 }
 
-.imgDiv {
-    width: 50%;
+img {
+   margin-right: 10px;
 
 }
