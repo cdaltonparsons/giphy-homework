@@ -95,6 +95,7 @@ $("#favorites").on("click", "img", function() {
 $("#submit").on("click", function() {
   event.preventDefault();
 
+if($("#keyword").val() !== "" ){
   function addBtn() {
     var keyword = $("#keyword")
       .val()
@@ -105,6 +106,9 @@ $("#submit").on("click", function() {
       .text(keyword);
     $(".buttons-container").append(newBtn);
   }
-  addBtn();
+  addBtn();}
+  else {
+    alert("Please enter a search term")
+  }
   $("#keyword").val("");
 });
