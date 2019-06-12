@@ -57,7 +57,7 @@ $(".buttons-container").on("click", ".personButton", function() {
   offset += 10;
 });
 
-$("#img-container").on("click", "img", function() {
+$(".container").on("click", "img", function() {
   var state = $(this).attr("data-state");
   var stillUrl = $(this).attr("data-still");
   var animateUrl = $(this).attr("data-animate");
@@ -76,27 +76,19 @@ $(".container").on("click", ".favorite", function() {
   var favGif = $("<img>")
     .attr("data-still", stillGif)
     .attr("data-animate", animatedGif)
-    .attr("src", stillGif);
+    .attr("src", stillGif)
+    .attr("data-state", "still");
   $("#favorites").prepend(favGif);
-});
-
-$("#favorites").on("click", "img", function() {
-  var state = $(this).attr("data-state");
-  var stillUrl = $(this).attr("data-still");
-  var animateUrl = $(this).attr("data-animate");
-  if (state === "still") {
-    $(this).attr("src", animateUrl);
-    $(this).attr("data-state", "animate");
-  } else {
-    $(this).attr("src", stillUrl);
-    $(this).attr("data-state", "still");
-  }
 });
 
 $("#submit").on("click", function() {
   event.preventDefault();
 
-  if ($("#keyword").val().trim() !== "") {
+  if (
+    $("#keyword")
+      .val()
+      .trim() !== ""
+  ) {
     function addBtn() {
       var keyword = $("#keyword")
         .val()
