@@ -34,13 +34,13 @@ $(".buttons-container").on("click", ".personButton", function() {
     $("#img-container").empty();
     var results = response.data;
     for (var i = 0; i < results.length; i++) {
-      var personDiv = $("<div>").addClass("imgDiv");
+      var personDiv = $("<div>");
       var rating = results[i].rating;
       var p = $("<p>").text("Rating : " + rating);
       var personImg = $("<img>")
         .attr("src", results[i].images.fixed_height_still.url)
         .attr("data-state", "still")
-        .attr("animate-url", results[i].images.fixed_height_still.url)
+        .attr("animate-url", results[i].images.fixed_height.url)
         .attr("still-url", results[i].images.fixed_height_still.url)
         .addClass("gifs col-md-6");
       personDiv.append(personImg, p);
@@ -63,6 +63,8 @@ $("#img-container").on("click", ".gifs", function() {
 });
 
 $("#submit").on("click", function() {
+  event.preventDefault();
+
   function addBtn() {
     var keyword = $("#keyword")
       .val()
@@ -73,5 +75,6 @@ $("#submit").on("click", function() {
       .text(keyword);
     $(".buttons-container").append(newBtn);
   }
+  $("#keyword").empty();
   addBtn();
 });
