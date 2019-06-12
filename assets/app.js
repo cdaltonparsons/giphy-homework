@@ -42,14 +42,14 @@ $(".buttons-container").on("click", ".personButton", function() {
       var favorite = $("<button>")
         .text("Like")
         .addClass("favorite")
-        .attr("animate-url", results[i].images.fixed_height.url)
-        .attr("still-url", results[i].images.fixed_height_still.url);
+        .attr("data-animate", results[i].images.fixed_height.url)
+        .attr("data-still", results[i].images.fixed_height_still.url);
       p.append(favorite);
       var personImg = $("<img>")
         .attr("src", results[i].images.fixed_height_still.url)
         .attr("data-state", "still")
-        .attr("animate-url", results[i].images.fixed_height.url)
-        .attr("still-url", results[i].images.fixed_height_still.url);
+        .attr("data-animate", results[i].images.fixed_height.url)
+        .attr("data-still", results[i].images.fixed_height_still.url);
       personDiv.append(personImg, p);
       $("#img-container").append(personDiv);
     }
@@ -59,8 +59,8 @@ $(".buttons-container").on("click", ".personButton", function() {
 
 $("#img-container").on("click", "img", function() {
   var state = $(this).attr("data-state");
-  var stillUrl = $(this).attr("still-url");
-  var animateUrl = $(this).attr("animate-url");
+  var stillUrl = $(this).attr("data-still");
+  var animateUrl = $(this).attr("data-animate");
   if (state === "still") {
     $(this).attr("src", animateUrl);
     $(this).attr("data-state", "animate");
@@ -68,8 +68,29 @@ $("#img-container").on("click", "img", function() {
     $(this).attr("src", stillUrl);
     $(this).attr("data-state", "still");
   }
-  console.log(this);
 });
+
+$(".container").on("click", ".favorite", function (){
+  var stillGif = $(this).attr("data-still")
+  var animatedGif = $(this).attr("data-animate")
+  var favGif = $("<img>").attr("data-still", stillGif).attr("data-animate", animatedGif).attr("src", stillGif);
+  $("#favorites").prepend(favGif)
+  
+})
+
+$("#favorites").on("click", "img", function() {
+  var state = $(this).attr("data-state");
+  var stillUrl = $(this).attr("data-still");
+  var animateUrl = $(this).attr("data-animate");
+  if (state === "still") {
+    $(this).attr("src", animateUrl);
+    $(this).attr("data-state", "animate");
+  } else {
+    $(this).attr("src", stillUrl);
+    $(this).attr("data-state", "still");
+  }
+});
+
 
 $("#submit").on("click", function() {
   event.preventDefault();
